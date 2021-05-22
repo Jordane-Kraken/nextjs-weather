@@ -19,6 +19,8 @@ export default function Home( {data} ) {
 
   const date = new Date();
   const hour = date.getHours();
+  var dayjs = require('dayjs');
+  var today = dayjs().format('DD/MM/YYYY');
 
   const getWeather = async() => {
     let input = document.getElementById('inputCity');
@@ -90,8 +92,10 @@ export default function Home( {data} ) {
       <h1 className={styles.title}>Next JS Application Météo</h1>       
       </header>
 
+      <p className={styles.paragraph}>Nous sommes le {today}.</p>
+
       <main className={styles.main}>
-      <h2 className={styles.subtitle}>Hey, quel temps fait-il aujourd'hui ? 😄</h2>
+      <h2 className={styles.subtitle}>Quel temps fait-il aujourd'hui ? 😄</h2>
       {dataFetching && typeof weather.main != "undefined" && (
       <Weather {...weather} />
       )

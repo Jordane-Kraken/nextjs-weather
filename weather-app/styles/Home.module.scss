@@ -8,8 +8,6 @@
   background-image : './images/night.png';
 }
 
-
-
 .header__bg {
   position: absolute;
   top: 0;
@@ -27,6 +25,10 @@
   position: relative;
   color: white;
   font-size: 3.7em;
+
+  @media (max-width: 600px) {
+    font-size: 3em;
+  }
 }
 
 .subtitle {
@@ -37,6 +39,7 @@
 .paragraph {
   font-size: 1.5em;
   text-align: right;
+  position: relative; 
 }
 
 .main {

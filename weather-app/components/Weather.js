@@ -4,6 +4,10 @@ import styles from '../styles/Home.module.scss';
   
   export default function Weather( {weather, main, name } ) {
 
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
     return(
 
       <Flex direction='column' >
@@ -16,7 +20,7 @@ import styles from '../styles/Home.module.scss';
             fontSize="xl"
             ml="2"
           >
-        {weather[0].description}
+        {capitalizeFirstLetter(weather[0].description)}
 
           </Text>
         <Text

@@ -92,7 +92,7 @@ export default function Home( {data} ) {
       <h1 className={styles.title}>Next JS Application Météo</h1>       
       </header>
 
-      <p className={styles.paragraph}>Nous sommes le {today}.</p>
+      <p className={styles.paragraph}>📅 Nous sommes le {today}.</p>
 
       <main className={styles.main}>
       <h2 className={styles.subtitle}>Quel temps fait-il aujourd'hui ? 😄</h2>

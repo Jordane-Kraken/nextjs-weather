@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head'
 import Loader from '../components/Loader';
 import Weather from '../components/Weather';
+import Error from '../components/Error';
 import { Container, Text, Input, Button, Heading } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
@@ -33,8 +34,6 @@ export default function Home( {data} ) {
     setWeather(response);
     setisLoading(false);
     setDataFetching(true);
-    console.log(weather);
-    console.log(hour);
     }
 
     if(response.cod !== 200) {
@@ -44,7 +43,7 @@ export default function Home( {data} ) {
   
     }
     if (input.value =='') {
-      console.log('empty')
+      console.log('Champ vide');
       }
   }
 
@@ -93,7 +92,7 @@ export default function Home( {data} ) {
       <h1 className={styles.title}>Next JS Application Météo</h1>       
       </header>
 
-      <p className={styles.paragraph}>📅 Nous sommes le {today}.</p>
+      <div className={styles.paragraph}>📅 Nous sommes le {today}.</div>
 
       <main className={styles.main}>
       <h2 className={styles.subtitle}>Quel temps fait-il aujourd'hui ? 😄</h2>
@@ -113,6 +112,7 @@ export default function Home( {data} ) {
           _placeholder={{ color: 'black' }}
           focusBorderColor= 'orange.400'
           id='inputCity'
+          isRequired
         />
         <Button
         type="submit"

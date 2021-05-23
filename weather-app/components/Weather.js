@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Heading, Text } from '@chakra-ui/react'
 import styles from '../styles/Home.module.scss';
   
-  export default function Weather( {weather, main, name } ) {
+  export default function Weather( {weather, main, name, wind } ) {
 
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -29,7 +29,7 @@ import styles from '../styles/Home.module.scss';
           isTruncated
           fontSize="xl"
         >
-        🌡️ Température : {Math.trunc(main.temp)}°C
+        🌡️ Température : <b>{Math.trunc(main.temp)}°C</b>
         </Text>
         <Text
           mt="1"
@@ -38,6 +38,14 @@ import styles from '../styles/Home.module.scss';
           fontSize="xl"
         >
         💧 Humidité : {main.humidity}%
+        </Text>
+        <Text
+          mt="1"
+          lineHeight="tight"
+          isTruncated
+          fontSize="xl"
+        >
+        💨 Vent : {Math.trunc(wind.speed)}km/h
         </Text>
       </Flex>
 

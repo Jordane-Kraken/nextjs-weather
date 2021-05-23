@@ -19,8 +19,9 @@ export default function Home( {data} ) {
 
   const date = new Date();
   const hour = date.getHours();
-  var dayjs = require('dayjs');
-  var today = dayjs().format('DD/MM/YYYY');
+  var day = new Date();
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  var today = day.toLocaleDateString("fr-FR", options);
 
   const getWeather = async() => {
     let input = document.getElementById('inputCity');

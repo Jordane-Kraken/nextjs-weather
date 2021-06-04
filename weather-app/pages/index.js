@@ -4,6 +4,7 @@ import Loader from '../components/Loader';
 import Weather from '../components/Weather';
 import Error from '../components/Error';
 import { Container, Text, Input, Button, Heading } from '@chakra-ui/react';
+import { List, ListItem, UnorderedList } from "@chakra-ui/react"
 import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
 
@@ -15,7 +16,7 @@ export default function Home( {data} ) {
   const [weather, setWeather] = React.useState({});
   const [isLoading, setisLoading] = React.useState(false);
   const [dataFetching, setDataFetching] = React.useState(false);
-  const [suggestions, setSuggestions] = React.useState([]);
+  const [suggestionsList, setSuggestionsList] = React.useState([]);
   const [dataSuggestions, setDataSuggestions] = React.useState(false);
 
   const date = new Date();
@@ -42,20 +43,23 @@ export default function Home( {data} ) {
     }
   
     }
-    if (input.value =='') {
-      console.log('Champ vide');
-      }
   }
 
     const getAutocomplete = async() => {
+      let input = document.getElementById('inputCity');
+    if (input.value !== '') {
+    setDataSuggestions(false);
       const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${value.replace(/ /g, '+')}&apiKey=${apiKeyHere}`);
       const response = await apiCall.json();
-      if (response){
-        setSuggestions(response.items);
-        setDataSuggestions(true);
-        console.log(suggestions);
-        return <div>{suggestions}</div>
+
+      if (response.items){
+        setDataSuggestions(true); 
+        setSuggestionsList(response.items);
       }
+      else {
+        setDataSuggestions(false);
+      }
+    }
     }
 
     const handleChange = (event) => {
@@ -84,7 +88,6 @@ export default function Home( {data} ) {
         <title>NextJS Weather App</title>
         <meta name="description" content="next js weather app" />
         <link rel="icon" href="/favicon.ico" />
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC17h4ma5hmFKsnknJTAjgZ04VJCFpqpns&libraries=places"></script>
       </Head>
 
       <header>
@@ -114,6 +117,13 @@ export default function Home( {data} ) {
           id='inputCity'
           isRequired
         />
+        {suggestionsList &&(
+        <UnorderedList>
+        {suggestionsList.map((suggestion) => 
+          <ListItem listStyleType="none" key={suggestion.id}>{suggestion.title}</ListItem>
+        )}
+        </UnorderedList>
+      )}
         <Button
         type="submit"
         marginTop='1em'
@@ -121,15 +131,19 @@ export default function Home( {data} ) {
         <SearchIcon color= '#000'/>
         </Button>
       </form>
+    
+      
 
       {isLoading && (
       <Loader />        
       )
       }
-      
+
  </main>
-      <footer>
-      </footer>
+
+ <div>
+   
+ </div>
     </Container>
 
   )

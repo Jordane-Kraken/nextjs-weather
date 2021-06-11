@@ -21,8 +21,11 @@ export default function Home( {data} ) {
   const date = moment().locale('fr').format('dddd DD-MM-YYYY');
 
   const hour = moment().locale('fr').format('HH');
+  let API_KEY = process.env.API_KEY;
+  let API_KEY_HERE = process.env.API_KEY_HERE;
 
   const getWeather = async() => {
+
     let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setisLoading(true);

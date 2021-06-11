@@ -9,7 +9,6 @@ import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
 
 export default function Home( {data} ) {
-  
   const apiKey= process.env.API_KEY;
   const apiKeyHere = process.env.API_KEY_HERE;
   const [value, setValue] = React.useState("")
@@ -49,7 +48,7 @@ export default function Home( {data} ) {
       let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setDataSuggestions(false);
-      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName.replace(/ /g, '+')}&apiKey=${apiKeyHere}`);
+      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName}&apiKey=${apiKeyHere}`);
       const response = await apiCall.json();
 
       if (response.items){
@@ -63,7 +62,7 @@ export default function Home( {data} ) {
     }
 
     const handleChange = (event) => {
-      setCityName(event.target.value);
+       setCityName(event.target.value);
       getAutocomplete();
       }
 
@@ -136,7 +135,7 @@ export default function Home( {data} ) {
         </Button>
         </InputRightElement>
         </InputGroup>
-        {suggestionsList &&(
+        {suggestionsList && (
         <UnorderedList>
         {suggestionsList.map((suggestion) => 
           <ListItem className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>

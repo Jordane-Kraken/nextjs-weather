@@ -26,7 +26,7 @@ export default function Home( {data} ) {
     let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setisLoading(true);
-    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${process.env.API_KEY}`);
+    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${API_KEY}`);
     const response = await apiCall.json();
     if (response) {
     setWeather(response);
@@ -46,7 +46,7 @@ export default function Home( {data} ) {
       let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setDataSuggestions(false);
-      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName}&apiKey=${process.env.API_KEY_HERE}`);
+      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName}&apiKey=${API_KEY_HERE}`);
       const response = await apiCall.json();
 
       if (response.items){

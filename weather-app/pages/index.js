@@ -9,8 +9,6 @@ import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
 
 export default function Home( {data} ) {
-  const apiKey= process.env.API_KEY;
-  const apiKeyHere = process.env.API_KEY_HERE;
   const [value, setValue] = React.useState("")
   const [weather, setWeather] = React.useState({});
   const [isLoading, setisLoading] = React.useState(false);
@@ -28,7 +26,7 @@ export default function Home( {data} ) {
     let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setisLoading(true);
-    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${apiKey}`);
+    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${process.env.API_KEY}`);
     const response = await apiCall.json();
     if (response) {
     setWeather(response);
@@ -48,7 +46,7 @@ export default function Home( {data} ) {
       let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setDataSuggestions(false);
-      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName}&apiKey=${apiKeyHere}`);
+      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName}&apiKey=${process.env.API_KEY_HERE}`);
       const response = await apiCall.json();
 
       if (response.items){

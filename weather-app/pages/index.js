@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Loader from '../components/Loader';
 import Weather from '../components/Weather';
 import Error from '../components/Error';
-import { Container, Text, Input, Button, Heading } from '@chakra-ui/react';
+import { Container, Text, InputGroup, Input, InputRightElement, Button, Heading } from '@chakra-ui/react';
 import { List, ListItem, UnorderedList } from "@chakra-ui/react"
 import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
@@ -18,18 +18,18 @@ export default function Home( {data} ) {
   const [dataFetching, setDataFetching] = React.useState(false);
   const [suggestionsList, setSuggestionsList] = React.useState([]);
   const [dataSuggestions, setDataSuggestions] = React.useState(false);
+  const [cityName, setCityName] = React.useState();
 
-  const date = new Date();
-  const hour = date.getHours();
-  var day = new Date();
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  var today = day.toLocaleDateString("fr-FR", options);
+  const moment = require('moment');
+  const date = moment().locale('fr').format('dddd DD-MM-YYYY');
+
+  const hour = moment().locale('fr').format('HH');
 
   const getWeather = async() => {
     let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setisLoading(true);
-    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${value}&units=metric&lang=fr&appid=${apiKey}`);
+    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${apiKey}`);
     const response = await apiCall.json();
     if (response) {
     setWeather(response);
@@ -49,7 +49,7 @@ export default function Home( {data} ) {
       let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setDataSuggestions(false);
-      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${value.replace(/ /g, '+')}&apiKey=${apiKeyHere}`);
+      const apiCall = await fetch(`https://autocomplete.search.hereapi.com/v1/autocomplete?q=${cityName.replace(/ /g, '+')}&apiKey=${apiKeyHere}`);
       const response = await apiCall.json();
 
       if (response.items){
@@ -63,9 +63,15 @@ export default function Home( {data} ) {
     }
 
     const handleChange = (event) => {
-      setValue(event.target.value);
+      setCityName(event.target.value);
       getAutocomplete();
       }
+
+    const changeValue = (suggestion) => {
+        setValue(suggestion.title);
+        let city = suggestion.address.city;
+        setCityName(city); 
+    }
   
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -74,11 +80,11 @@ export default function Home( {data} ) {
 
   return (
     <Container
-    height="100vh"
+    minHeight="100vh"
     textAlign="center"
     maxW="100%"
     className={styles.container}
-    backgroundImage= {(hour > 20 || hour < 6) ? './images/night.png' : './images/day.png' }
+    backgroundImage= {(hour > 20 || hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
     backgroundPosition="center"
     backgroundSize="cover"
     id="container"
@@ -95,49 +101,50 @@ export default function Home( {data} ) {
       <h1 className={styles.title}>Next JS Application Météo</h1>       
       </header>
 
-      <div className={styles.paragraph}>📅 Nous sommes le {today}.</div>
+      <div className={styles.paragraph}>📅 Nous sommes le {date}</div>
 
       <main className={styles.main}>
       <h2 className={styles.subtitle}>Quel temps fait-il aujourd'hui ? 😄</h2>
+      <div className={styles.loader}>
+      {isLoading && (
+        <Loader />
+      )}
+      </div>
       {dataFetching && typeof weather.main != "undefined" && (
       <Weather {...weather} />
       )
       }
       <form onSubmit={handleSubmit} className={styles.form}>
         <Text mb="15px" fontSize="20px">Ville :</Text>
+        <InputGroup size="lg" maxW="65%" margin="auto">
         <Input
-          value={value}
+          value={cityName}
           onChange={handleChange}
           placeholder="Ville"
           size="lg"
-          maxW='70%'
           marginBottom= '1em'
           _placeholder={{ color: 'black' }}
           focusBorderColor= 'orange.400'
           id='inputCity'
           isRequired
         />
-        {suggestionsList &&(
-        <UnorderedList>
-        {suggestionsList.map((suggestion) => 
-          <ListItem listStyleType="none" key={suggestion.id}>{suggestion.title}</ListItem>
-        )}
-        </UnorderedList>
-      )}
+        <InputRightElement>
         <Button
         type="submit"
-        marginTop='1em'
         >
         <SearchIcon color= '#000'/>
         </Button>
+        </InputRightElement>
+        </InputGroup>
+        {suggestionsList &&(
+        <UnorderedList>
+        {suggestionsList.map((suggestion) => 
+          <ListItem className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
+        )}
+        </UnorderedList>
+      )}
       </form>
-    
-      
 
-      {isLoading && (
-      <Loader />        
-      )
-      }
 
  </main>
 

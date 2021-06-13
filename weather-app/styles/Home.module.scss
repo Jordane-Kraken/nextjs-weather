@@ -17,6 +17,9 @@
   background-image: linear-gradient(#F2B291, #ff6126);
   transform: skewY(-6deg);
   transform-origin: top left;
+  @media (max-width: 600px) {
+    height: 25%;
+  }
 }
 
 .title {
@@ -25,9 +28,6 @@
   font-size: 3.7em;
   font-family: 'Indie flower', sans-serif;
 
-  @media (max-width: 600px) {
-    font-size: 3em;
-  }
 }
 
 .subtitle {
@@ -70,7 +70,25 @@
   }
 }
 
+.card {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items:center;
+  
+}
+
 .icon {
   display: block;
   margin: auto;
+}
+
+.error {
+  text-align: center;
+  font-size: 1.3em;
+  color: #fff;
+  border: solid 1px #ff6126;
+  width: 35%;
+  margin : 1px auto;
+  border-radius: 10px;
 }

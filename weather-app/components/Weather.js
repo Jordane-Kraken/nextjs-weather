@@ -9,20 +9,19 @@ import styles from '../styles/Home.module.scss';
     };
 
     return(
-
-      <Flex direction='column' >
-          <Heading as="h3" size="md">
+      <>
+          <Heading as="h3" size="xl">
           📍 {name}
           <img src={`https://openweathermap.org/img/w/${weather[0].icon}.png`} className={styles.icon}/>
-          </Heading>
           <Text
             letterSpacing="wide"
             fontSize="xl"
-            ml="2"
+            m="2"
           >
         {capitalizeFirstLetter(weather[0].description)}
-
           </Text>
+          </Heading>
+      <div className={styles.card}>    
         <Text
           mt="1"
           lineHeight="tight"
@@ -47,7 +46,9 @@ import styles from '../styles/Home.module.scss';
         >
         💨 Vent : {Math.trunc(wind.speed)}km/h
         </Text>
-      </Flex>
+        </div>
+        </>
+      
 
     );
   }

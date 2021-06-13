@@ -13,13 +13,10 @@
   right: 0;
   left: 0;
   width: 100%;
-  height: 25%;
+  height: 27%;
   background-image: linear-gradient(#F2B291, #ff6126);
   transform: skewY(-6deg);
   transform-origin: top left;
-  @media (max-width: 455px) {
-    height: 27%;
-  }
 }
 
 .title {
@@ -27,10 +24,11 @@
   color: white;
   font-size: 3.7em;
   font-family: 'Indie flower', sans-serif;
+  margin-bottom: 1em;
   @media (max-width: 455px) {
-    font-size: 2.7em;
+    font-size: 2.8em;
+    margin-bottom: 2em;
   }
-
 }
 
 .subtitle {

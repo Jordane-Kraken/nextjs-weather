@@ -144,7 +144,7 @@ export default function Home( {data} ) {
             <UnorderedList>
             {suggestionsList.map((suggestion) => 
               <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start">
-              <ListItem className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
+              <ListItem color='#000' className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
               </Tooltip>
             )}
             </UnorderedList>

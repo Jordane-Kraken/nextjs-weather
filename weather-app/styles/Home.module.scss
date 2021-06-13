@@ -17,8 +17,8 @@
   background-image: linear-gradient(#F2B291, #ff6126);
   transform: skewY(-6deg);
   transform-origin: top left;
-  @media (max-width: 600px) {
-    height: 25%;
+  @media (max-width: 455px) {
+    height: 27%;
   }
 }
 
@@ -27,6 +27,9 @@
   color: white;
   font-size: 3.7em;
   font-family: 'Indie flower', sans-serif;
+  @media (max-width: 455px) {
+    font-size: 2.7em;
+  }
 
 }
 

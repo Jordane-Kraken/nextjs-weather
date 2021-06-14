@@ -134,6 +134,7 @@ export default function Home( {data} ) {
             />
             <InputRightElement>
             <Button
+            size="lg"
             type="submit"
             >
             <SearchIcon color= '#000'/>
@@ -143,7 +144,7 @@ export default function Home( {data} ) {
             {suggestionsList && (
             <UnorderedList>
             {suggestionsList.map((suggestion) => 
-              <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start">
+              <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start" key={suggestion.id}>
               <ListItem className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
               </Tooltip>
             )}

@@ -71,6 +71,7 @@ export default function Home( {data} ) {
       setValue(suggestion.title);
       let city = suggestion.address.city;
       setCityName(city); 
+
     }
   
     const handleSubmit = (evt) => {
@@ -145,7 +146,7 @@ export default function Home( {data} ) {
             <UnorderedList>
             {suggestionsList.map((suggestion) => 
               <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start" key={suggestion.id}>
-              <ListItem className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
+              <ListItem className={styles.listItem} color= '#000' listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
               </Tooltip>
             )}
             </UnorderedList>

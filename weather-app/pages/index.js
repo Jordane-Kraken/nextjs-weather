@@ -22,6 +22,7 @@ export default function Home( {data} ) {
   const date = moment().locale('fr').format('dddd DD-MM-YYYY');
 
   const hour = moment().locale('fr').format('HH');
+  console.log (hour);
   let API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   let API_KEY_HERE = process.env.NEXT_PUBLIC_API_KEY_HERE;
 
@@ -84,12 +85,12 @@ export default function Home( {data} ) {
     textAlign="center"
     maxW="100%"
     className={styles.container}
-    backgroundImage= {(hour > 20 && hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
+    backgroundImage= {(hour > 20 || hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
     backgroundPosition="center"
     backgroundSize="cover"
     backgroundRepeat = "no-repeat"
     id="container"
-    color= {(hour > 20 && hour < 6) ? '#fff' : '#000' }
+    color= {(hour > 20 || hour < 6) ? '#fff' : '#000' }
     >
       <Head>
         <title>NextJS Weather App</title>
@@ -127,7 +128,7 @@ export default function Home( {data} ) {
               placeholder="Ville"
               size="lg"
               marginBottom= '1em'
-              _placeholder={{ color: hour > 20 && hour < 6 ? '#fff' : '#000' }}
+              _placeholder={{ color: hour > 20 || hour < 6 ? '#fff' : '#000' }}
               focusBorderColor= 'orange.400'
               id='inputCity'
               isRequired

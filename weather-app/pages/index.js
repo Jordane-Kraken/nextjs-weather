@@ -22,7 +22,6 @@ export default function Home( {data} ) {
   const date = moment().locale('fr').format('dddd DD-MM-YYYY');
 
   const hour = moment().locale('fr').format('HH');
-  console.log (hour);
   let API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   let API_KEY_HERE = process.env.NEXT_PUBLIC_API_KEY_HERE;
 

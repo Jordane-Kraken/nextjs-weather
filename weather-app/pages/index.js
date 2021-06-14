@@ -33,6 +33,7 @@ export default function Home( {data} ) {
     const response = await apiCall.json();
     if (response) {
     setWeather(response);
+    console.log(weather);
     setisLoading(false);
     setDataFetching(true);
     setError(false);
@@ -84,12 +85,12 @@ export default function Home( {data} ) {
     textAlign="center"
     maxW="100%"
     className={styles.container}
-    backgroundImage= {(hour > 20 || hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
+    backgroundImage= {(hour > 20 && hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
     backgroundPosition="center"
     backgroundSize="cover"
     backgroundRepeat = "no-repeat"
     id="container"
-    color= {(hour > 20 || hour < 6) ? '#fff' : '#000' }
+    color= {(hour > 20 && hour < 6) ? '#fff' : '#000' }
     >
       <Head>
         <title>NextJS Weather App</title>
@@ -109,17 +110,17 @@ export default function Home( {data} ) {
           {error && (
           <Error />        
           )}
-          <div className={styles.loader}>
-          {isLoading && (
-            <Loader />
-          )}
-          </div>
           {dataFetching && typeof weather.main != "undefined" && (
           <Weather {...weather} />
           )
           }
           <form onSubmit={handleSubmit} className={styles.form}>
             <Text mb="1em" mt="1em" fontSize="1.7em">Ville :</Text>
+            <div className={styles.loader}>
+            {isLoading && (
+              <Loader />
+            )}
+          </div>
             <InputGroup size="lg" maxW="65%" margin="auto">
             <Input
               value={cityName}
@@ -134,6 +135,7 @@ export default function Home( {data} ) {
             />
             <InputRightElement>
             <Button
+             size="lg"
             type="submit"
             >
             <SearchIcon color= '#000'/>
@@ -143,7 +145,7 @@ export default function Home( {data} ) {
             {suggestionsList && (
             <UnorderedList>
             {suggestionsList.map((suggestion) => 
-              <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start">
+              <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start" key={suggestion.id}>
               <ListItem color='#000' className={styles.listItem} listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
               </Tooltip>
             )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Heading, Text } from '@chakra-ui/react'
 import styles from '../styles/Home.module.scss';
   
   export default function Weather( {weather, main, name, wind } ) {
@@ -9,18 +9,15 @@ import styles from '../styles/Home.module.scss';
     };
 
     return(
-      <>
-          <Heading as="h3" size="xl">
+      <div className={styles.box}>
+          <h3 className={styles.headingCard}>
           📍 {name}
+          </h3>
           <img src={`https://openweathermap.org/img/w/${weather[0].icon}.png`} className={styles.icon}/>
-          <Text
-            letterSpacing="wide"
-            fontSize="xl"
-            m="2"
-          >
+          <p className={styles.subHeadingCard}>
         {capitalizeFirstLetter(weather[0].description)}
-          </Text>
-          </Heading>
+          </p>
+          
       <div className={styles.card}>    
         <Text
           mt="1"
@@ -28,7 +25,7 @@ import styles from '../styles/Home.module.scss';
           isTruncated
           fontSize="xl"
         >
-        🌡️ Température : <b>{Math.trunc(main.temp)}°C</b>
+        🌡️ Température : {Math.trunc(main.temp)}°C
         </Text>
         <Text
           mt="1"
@@ -47,9 +44,7 @@ import styles from '../styles/Home.module.scss';
         💨 Vent : {Math.trunc(wind.speed)}km/h
         </Text>
         </div>
-        </>
-      
-
+        </div>
     );
   }
 

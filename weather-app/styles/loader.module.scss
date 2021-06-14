@@ -4,11 +4,12 @@ $color-3: #542437;
 $color-4: #53777A;
 
 .loader {
+
 	
 	&:before,
 	&:after {
 		position: absolute;
-		top: 22%;
+		top: 30%;
 		left: 50%;
     opacity: 0.3;
 		border-radius: 50%;

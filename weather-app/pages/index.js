@@ -21,7 +21,9 @@ export default function Home( {data} ) {
   const moment = require('moment');
   const date = moment().locale('fr').format('dddd DD-MM-YYYY');
 
-  const hour = moment().locale('fr').format('HH');
+  var today = new Date();
+  let hour = today.getHours();
+
   let API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   let API_KEY_HERE = process.env.NEXT_PUBLIC_API_KEY_HERE;
 
@@ -71,7 +73,6 @@ export default function Home( {data} ) {
       setValue(suggestion.title);
       let city = suggestion.address.city;
       setCityName(city); 
-
     }
   
     const handleSubmit = (evt) => {

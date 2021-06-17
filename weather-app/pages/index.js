@@ -86,12 +86,12 @@ export default function Home( {data} ) {
     textAlign="center"
     maxW="100%"
     className={styles.container}
-    backgroundImage= {(hour > 20 || hour < 6) ? './images/night1.jpeg' : './images/day1.jpeg' }
+    backgroundImage= {(hour > 6 && hour < 20) ? './images/day1.jpeg' : './images/night1.jpeg' }
     backgroundPosition="center"
     backgroundSize="cover"
     backgroundRepeat = "no-repeat"
     id="container"
-    color= {(hour > 20 || hour < 6) ? '#fff' : '#000' }
+    color= {(hour > 6 && hour < 20) ? '#000' : '#fff' }
     >
       <Head>
         <title>NextJS Weather App</title>
@@ -129,7 +129,7 @@ export default function Home( {data} ) {
               placeholder="Ville"
               size="lg"
               marginBottom= '1em'
-              _placeholder={{ color: hour > 20 || hour < 6 ? '#fff' : '#000' }}
+              _placeholder={{ color: hour > 6 && hour < 20 ? '#000' : '#fff' }}
               focusBorderColor= 'orange.400'
               id='inputCity'
               isRequired

@@ -8,8 +8,7 @@ import { ListItem, UnorderedList } from "@chakra-ui/react"
 import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
 
-export default function Home( {data} ) {
-  const [value, setValue] = React.useState("")
+export default function Home() {
   const [weather, setWeather] = React.useState({});
   const [isLoading, setisLoading] = React.useState(false);
   const [dataFetching, setDataFetching] = React.useState(false);
@@ -27,11 +26,12 @@ export default function Home( {data} ) {
   let API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   let API_KEY_HERE = process.env.NEXT_PUBLIC_API_KEY_HERE;
 
-  const getWeather = async() => {
+  const getWeather = async(city) => {
+    setCityName(city);
     let input = document.getElementById('inputCity');
     if (input.value !== '') {
     setisLoading(true);
-    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=fr&appid=${API_KEY}`);
+    const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=fr&appid=${API_KEY}`);
     const response = await apiCall.json();
     if (response) {
     setWeather(response);
@@ -64,20 +64,13 @@ export default function Home( {data} ) {
     }
     }
 
-    const handleChange = (event) => {
+    const handleChange = () => {
       setCityName(event.target.value);
       getAutocomplete();
       }
 
-    const changeValue = (suggestion) => {
-      setValue(suggestion.title);
-      let city = suggestion.address.city;
-      setCityName(city); 
-    }
-  
     const handleSubmit = (evt) => {
-    evt.preventDefault();
-    getWeather();
+     evt.preventDefault();
     }
 
   return (
@@ -111,17 +104,17 @@ export default function Home( {data} ) {
           {error && (
           <Error />        
           )}
-          <div className={styles.loader}>
+
           {isLoading && (
-            <Loader />
+            <Loader className={styles.loader} />
           )}
-          </div>
+   
           {dataFetching && typeof weather.main != "undefined" && (
           <Weather {...weather} />
           )
           }
           <form onSubmit={handleSubmit} className={styles.form}>
-            <Text mb="1em" mt="1em" fontSize="1.7 cem">Ville :</Text>
+            <Text mb="1em" mt="1em" fontSize="1.7em">Ville :</Text>
             <InputGroup size="lg" maxW="65%" margin="auto">
             <Input
               value={cityName}
@@ -134,21 +127,13 @@ export default function Home( {data} ) {
               id='inputCity'
               isRequired
             />
-            <InputRightElement>
-            <Button
-            size="lg"
-            type="submit"
-            >
-            <SearchIcon color= '#000'/>
-            </Button>
-            </InputRightElement>
             </InputGroup>
             {suggestionsList && (
             <UnorderedList>
             {suggestionsList.map((suggestion) => 
-              <Tooltip label="Sélectionnez la ville et cliquez sur la 🔍" aria-label="tooltip" placement="top-start" key={suggestion.id}>
-              <ListItem className={styles.listItem} color= '#000' listStyleType="none" key={suggestion.id} onClick={() => {changeValue(suggestion)}}>{suggestion.title}</ListItem>
-              </Tooltip>
+              <ListItem className={styles.listItem} color= '#000' listStyleType="none" key={suggestion.id} onClick={() => {getWeather(suggestion.address.city);}}>
+                {suggestion.title}
+              </ListItem>
             )}
             </UnorderedList>
           )}

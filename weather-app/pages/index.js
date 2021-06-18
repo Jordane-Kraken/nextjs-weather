@@ -94,12 +94,10 @@ export default function Home() {
 
       <header>
       <div className={styles.header__bg}></div>
-      <h1 className={styles.title}>Next JS Application Météo</h1>       
+      <h1 className={styles.title}>Next JS Application Météo</h1>      
       </header>
-
-      <div className={styles.paragraph}>📅 Nous sommes le {date}</div>
-
         <main className={styles.main}>
+        <div className={styles.paragraph}>📅 Nous sommes le {date}</div> 
           <h2 className={styles.subtitle}>Hey, quel temps fait-il aujourd'hui ? 😄</h2>
           {error && (
           <Error />        

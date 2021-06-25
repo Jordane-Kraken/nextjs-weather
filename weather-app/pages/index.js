@@ -9,6 +9,12 @@ import { SearchIcon } from '@chakra-ui/icons';
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
+  const moment = require('moment');
+  const date = moment().locale('fr').format('dddd DD-MM-YYYY');
+
+  var today = new Date();
+  let hourUser = today.getHours();
+
   const [weather, setWeather] = React.useState({});
   const [isLoading, setisLoading] = React.useState(false);
   const [dataFetching, setDataFetching] = React.useState(false);
@@ -16,12 +22,7 @@ export default function Home() {
   const [dataSuggestions, setDataSuggestions] = React.useState(false);
   const [cityName, setCityName] = React.useState();
   const [error, setError] = React.useState(false);
-
-  const moment = require('moment');
-  const date = moment().locale('fr').format('dddd DD-MM-YYYY');
-
-  var today = new Date();
-  let hour = today.getHours();
+  const [hour, setHour] = React.useState(hourUser);
 
   let API_KEY = process.env.NEXT_PUBLIC_API_KEY;
   let API_KEY_HERE = process.env.NEXT_PUBLIC_API_KEY_HERE;

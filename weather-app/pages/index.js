@@ -88,8 +88,8 @@ export default function Home() {
     color= {(hour > 6 && hour < 20) ? '#000' : '#fff' }
     >
       <Head>
-        <title>NextJS Weather App</title>
-        <meta name="description" content="next js weather app" />
+        <title>NextJS Application Météo</title>
+        <meta name="description" content="NextJS Application Météo" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+##Next JS Application météo ☀
+
+Application permettant de connaître la météo en temps réel.
+Utilisation de l'API OpenWeatherMap et Here Geocoder.
+
 ## Getting Started
 
 First, run the development server:

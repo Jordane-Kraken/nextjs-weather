@@ -6,7 +6,7 @@ Lancer yarn install pour installer les dépendances.
 Lancer yarn dev pour démarrer le serveur.
 
 #### Technologies
-Nextjs
-SCSS
-Moment.js
+Nextjs<br>
+SCSS<br>
+Moment.js<br>
 Chakra ui
